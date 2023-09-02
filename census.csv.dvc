@@ -1,0 +1,5 @@
+outs:
+- md5: 4d8afe367729e0fe57b0b3c75d2e0038
+  size: 3974460
+  hash: md5
+  path: census.csv
