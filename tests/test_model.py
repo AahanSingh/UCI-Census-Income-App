@@ -15,7 +15,17 @@ from src.ml.data import process_data
 def dataset():
     dirname = Path(__file__).parent.parent
     datapath = f"{dirname}/data/census-clean.csv"
-    return pd.read_csv(datapath)
+    df = pd.read_csv(datapath)
+    new_cols = {
+        "education-num": "education_num",
+        "marital-status": "marital_status",
+        "capital-gain": "capital_gain",
+        "capital-loss": "capital_loss",
+        "hours-per-week": "hours_per_week",
+        "native-country": "native_country"
+    }
+    df.rename(new_cols, inplace=True)
+    return df
 
 
 @pytest.fixture
