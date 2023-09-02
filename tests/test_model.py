@@ -75,9 +75,9 @@ def test_get_data_slice(X):
         X.query("sex == 'Female'"),
         X.query("sex == 'Male'")
     ]
-    res = [(val, i) for val,i in get_data_slice(X, column)]
-    assert res[0][0]=="Female"
-    assert res[1][0]=="Male"
+    res = [(val, i) for val, i in get_data_slice(X, column)]
+    assert res[0][0] == "Female"
+    assert res[1][0] == "Male"
     assert expected[0].equals(res[0][1])
     assert expected[1].equals(res[1][1])
 

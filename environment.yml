@@ -6,16 +6,15 @@ dependencies:
   - python=3.8
   - git=2.30.2
   - pip=20.3.3
-  - pip:
-    - dvc
-    - scikit-learn
-    - pandas
-    - numpy
-    - pytest
-    - requests
-    - jupyter
-    - jupyterlab
-    - fastapi==0.63.0
-    - uvicorn
-    - gunicorn
-    - flake8
+  - uvicorn
+  - gunicorn
+  - flake8
+  - dvc
+  - scikit-learn
+  - pandas
+  - numpy
+  - pytest
+  - requests
+  - jupyter
+  - jupyterlab
+  - fastapi=0.63.0
