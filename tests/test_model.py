@@ -14,7 +14,7 @@ from src.ml.data import process_data
 @pytest.fixture
 def dataset():
     dirname = Path(__file__).parent.parent
-    datapath = f"{dirname}/census.csv"
+    datapath = f"{dirname}/data/census-clean.csv"
     return pd.read_csv(datapath)
 
 
@@ -28,12 +28,12 @@ def features():
     return [
         "workclass",
         "education",
-        "marital-status",
+        "marital_status",
         "occupation",
         "relationship",
         "race",
         "sex",
-        "native-country",
+        "native_country",
     ]
 
 

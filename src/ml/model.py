@@ -8,12 +8,12 @@ from sklearn.ensemble import RandomForestClassifier
 # TODO: implement hyperparameter tuning.
 
 
-def save_model(save_path: str, model: RandomForestClassifier):
+def save_model(save_path: str, model):
     with open(f'{save_path}/model.pkl', 'wb') as file:
         pickle.dump(model, file)
 
 
-def load_model(model_path: str) -> RandomForestClassifier:
+def load_model(model_path: str):
     with open(model_path, 'rb') as file:
         loaded_model = pickle.load(file)
     return loaded_model
@@ -34,7 +34,7 @@ def train_model(X_train: pd.DataFrame, y_train: pd.DataFrame):
     model
         Trained machine learning model.
     """
-    clf = RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1)
+    clf = RandomForestClassifier(max_depth=50, n_estimators=500)
     clf.fit(X_train, y_train)
     return clf
 
@@ -88,22 +88,3 @@ def get_data_slice(X, column):
     unique = get_unique(X, column)
     for i in unique:
         yield (i, X.query(f"{column} == '{i}'"))
-
-
-def compute_metrics_on_slice(model, X_test, y_test, columns):
-    res = {}
-    for s in columns:
-        res[s] = {}
-        for val, data_slice in get_data_slice(X_test, s):
-            preds = inference(
-                model,
-                y_test.iloc[data_slice.index])
-            precision, recall, fbeta = compute_model_metrics(
-                y_test.iloc[data_slice.index],
-                preds
-            )
-            res[s][val] = {
-                "Precision": precision,
-                "Recall": recall,
-                "fbeta": fbeta}
-    return json.dumps(res)
