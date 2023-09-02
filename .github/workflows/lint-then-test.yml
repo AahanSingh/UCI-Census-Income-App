@@ -13,15 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: iterative/setup-dvc@v1
       - uses: conda-incubator/setup-miniconda@v2
         with:
           python-version: 3.8
           mamba-version: "*"
           activate-environment: test
           environment-file: environment.yml
-      - name: Mamba env list
+      - name: Data pull
         shell: pwsh
-        run: mamba env list
+        run: dvc pull
       - name: Lint with flake8
         shell: pwsh
         run: |
