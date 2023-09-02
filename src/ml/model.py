@@ -1,8 +1,25 @@
+import pickle
+import json
+
+import pandas as pd
 from sklearn.metrics import fbeta_score, precision_score, recall_score
+from sklearn.ensemble import RandomForestClassifier
+
+# TODO: implement hyperparameter tuning.
 
 
-# Optional: implement hyperparameter tuning.
-def train_model(X_train, y_train):
+def save_model(save_path: str, model: RandomForestClassifier):
+    with open(f'{save_path}/model.pkl', 'wb') as file:
+        pickle.dump(model, file)
+
+
+def load_model(model_path: str) -> RandomForestClassifier:
+    with open(model_path, 'rb') as file:
+        loaded_model = pickle.load(file)
+    return loaded_model
+
+
+def train_model(X_train: pd.DataFrame, y_train: pd.DataFrame):
     """
     Trains a machine learning model and returns it.
 
@@ -17,13 +34,15 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
-
-    pass
+    clf = RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1)
+    clf.fit(X_train, y_train)
+    return clf
 
 
 def compute_model_metrics(y, preds):
     """
-    Validates the trained machine learning model using precision, recall, and F1.
+    Validates the trained machine learning model using precision,
+    recall, and F1.
 
     Inputs
     ------
@@ -48,7 +67,7 @@ def inference(model, X):
 
     Inputs
     ------
-    model : ???
+    model : Random forest model
         Trained machine learning model.
     X : np.array
         Data used for prediction.
@@ -57,4 +76,34 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+    preds = model.predict(X)
+    return preds
+
+
+def get_unique(X, column):
+    return sorted(X[column].unique())
+
+
+def get_data_slice(X, column):
+    unique = get_unique(X, column)
+    for i in unique:
+        yield (i, X.query(f"{column} == '{i}'"))
+
+
+def compute_metrics_on_slice(model, X_test, y_test, columns):
+    res = {}
+    for s in columns:
+        res[s] = {}
+        for val, data_slice in get_data_slice(X_test, s):
+            preds = inference(
+                model,
+                y_test.iloc[data_slice.index])
+            precision, recall, fbeta = compute_model_metrics(
+                y_test.iloc[data_slice.index],
+                preds
+            )
+            res[s][val] = {
+                "Precision": precision,
+                "Recall": recall,
+                "fbeta": fbeta}
+    return json.dumps(res)
