@@ -31,7 +31,6 @@ def compute_metrics_on_slice(model, test, columns, encoder, lb):
             res[val]["fbeta"] = fbeta
         print(pd.DataFrame.from_dict(res))
         print("\n\n")
-        
 
 
 def run(save_path, data_path):
