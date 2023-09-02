@@ -9,7 +9,7 @@ dependencies:
   - uvicorn
   - gunicorn
   - flake8
-  - dvc
+  - dvc-s3
   - scikit-learn
   - pandas
   - numpy
