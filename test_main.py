@@ -44,7 +44,7 @@ def valid_input2():
         "capital-loss": 0,
         "hours-per-week": 45,
         "native-country": "United-States"
-        }
+    }
 
 
 @pytest.fixture
@@ -54,6 +54,7 @@ def invalid_input1():
         "workclass": 10101010,
         "fnlgt": "test"
     }
+
 
 @pytest.fixture
 def invalid_input2():
@@ -72,7 +73,8 @@ def invalid_input2():
         "capital-loss": 0,
         "hours-per-week": 45,
         "native-country": "United-States"
-        }
+    }
+
 
 def test_greet_function():
     result = client.get("/")
@@ -97,6 +99,7 @@ def test_valid_input_data2(valid_input2):
 def test_invalid_input_data(invalid_input1):
     result = client.post("/", data=invalid_input1)
     assert result.status_code == 422
+
 
 def test_invalid_input_data2(invalid_input2):
     result = client.post("/", data=invalid_input2)
