@@ -24,7 +24,7 @@ def dataset():
         "hours-per-week": "hours_per_week",
         "native-country": "native_country"
     }
-    df.rename(new_cols, inplace=True)
+    df.rename(columns = new_cols, inplace=True)
     return df
 
 
