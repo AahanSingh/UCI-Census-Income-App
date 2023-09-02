@@ -13,20 +13,26 @@ from src.ml.data import process_data
 
 
 class InputData(BaseModel):
-    age: int
-    workclass: str
-    fnlgt: int
-    education: str
-    education_num: int = Field(alias='education-num')
-    marital_status: str = Field(alias='marital-status')
-    occupation: str
-    relationship: str
-    race: str
-    sex: str
-    capital_gain: int = Field(alias='capital-gain')
-    capital_loss: int = Field(alias='capital-loss')
-    hours_per_week: int = Field(alias='hours-per-week')
-    native_country: str = Field(alias='native-country')
+    age: int = 26
+    workclass: str = "State-gov"
+    fnlgt: int = 20000
+    education: str = "Bachelors"
+    education_num: int = Field(alias='education-num', examples=[13])
+    marital_status: str = Field(
+        alias='marital-status',
+        examples=[
+            "Married",
+            "Divorced"])
+    occupation: str = "Adm-clerical"
+    relationship: str = "Not-in-family"
+    race: str = "White"
+    sex: str = "Female"
+    capital_gain: int = Field(alias='capital-gain', examples=[2174])
+    capital_loss: int = Field(alias='capital-loss', examples=[0])
+    hours_per_week: int = Field(alias='hours-per-week', examples=[40])
+    native_country: str = Field(
+        alias='native-country',
+        examples=["United-States"])
 
 
 # Initialize FastAPI instance
