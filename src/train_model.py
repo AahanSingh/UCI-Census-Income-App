@@ -1,5 +1,5 @@
 from pathlib import Path
-import json
+import sys
 import pickle
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -10,10 +10,16 @@ from ml.model import save_model
 from ml.model import compute_model_metrics
 from ml.model import inference, get_data_slice
 
+original_stdout = sys.stdout
 
-def compute_metrics_on_slice(model, test, columns, encoder, lb):
-    for c in columns:
+
+def compute_metrics_on_slice(model, test, columns, slice_columns, encoder, lb):
+    for c in slice_columns:
         print(c)
+        with open("slice_output.txt", "a") as f:
+            sys.stdout = f
+            print(c)
+            sys.stdout = original_stdout
         res = {}
         for val, data_slice in get_data_slice(test, c):
             X_test, y_test, _, _ = process_data(
@@ -31,6 +37,11 @@ def compute_metrics_on_slice(model, test, columns, encoder, lb):
             res[val]["fbeta"] = fbeta
         print(pd.DataFrame.from_dict(res))
         print("\n\n")
+        with open("slice_output.txt", "a") as f:
+            sys.stdout = f
+            print(pd.DataFrame.from_dict(res))
+            print("\n\n")
+            sys.stdout = original_stdout
 
 
 def run(save_path, data_path):
@@ -72,7 +83,17 @@ def run(save_path, data_path):
     )
     print(f"\tPrecision: {precision}\tRecall: {recall}\tfbeta: {fbeta}")
     print("\n\nSLICE WISE METRICS:")
-    compute_metrics_on_slice(trained_model, test, cat_features, encoder, lb)
+    with open("slice_output.txt", "a") as f:
+        sys.stdout = f
+        print("MODEL METRICS:")
+        print("Overall metrics:")
+        print(f"\tPrecision: {precision}\tRecall: {recall}\tfbeta: {fbeta}")
+        print("\n\nSLICE WISE METRICS:")
+        sys.stdout = original_stdout
+
+    compute_metrics_on_slice(
+        trained_model, test, cat_features, [
+            "marital_status", "sex"], encoder, lb)
 
 
 if __name__ == "__main__":
