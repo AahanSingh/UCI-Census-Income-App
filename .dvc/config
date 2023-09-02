@@ -1,4 +1,4 @@
 [core]
-    remote = local-store
-['remote "local-store"']
-    url = ../data
+    remote = s3-store
+['remote "s3-store"']
+    url = s3://udacity-dvc-data-store
