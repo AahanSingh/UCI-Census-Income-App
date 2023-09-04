@@ -1,10 +1,9 @@
 # syntax = docker/dockerfile:1.2
 FROM  python:3.8.17
-
-RUN --mount=type=secret,id=s1,dst=/etc/secrets/s1 AWS_ACCESS_KEY_ID=$(cat /etc/secrets/s1)
-RUN --mount=type=secret,id=s2,dst=/etc/secrets/s2 AWS_SECRET_ACCESS_KEY=$(cat /etc/secrets/s2)
-ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+ARG s1
+ARG s2
+ENV AWS_ACCESS_KEY_ID=$s1
+ENV AWS_SECRET_ACCESS_KEY=$s2
 RUN mkdir -p /app
 WORKDIR /app/
 RUN apt-get update
