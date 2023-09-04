@@ -10,6 +10,11 @@ from src.ml.model import load_model, inference
 from src.ml.data import process_data
 
 # Declare the data object with its components and their type.
+from dvc.repo import Repo
+
+print("Pulling data from dvc")
+repo = Repo(".")
+repo.pull()
 
 
 class InputData(BaseModel):
