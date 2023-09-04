@@ -1,7 +1,8 @@
 uvicorn
 gunicorn
 flake8
-dvc-s3
+dvc
+dvc[s3]
 scikit-learn
 pandas
 numpy
