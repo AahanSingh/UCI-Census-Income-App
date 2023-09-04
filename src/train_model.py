@@ -56,7 +56,7 @@ def run(save_path, data_path):
         "hours-per-week": "hours_per_week",
         "native-country": "native_country"
     }
-    df.rename(new_cols, inplace=True)
+    df.rename(columns = new_cols, inplace=True)
     train, test = train_test_split(df, test_size=0.20)
     cat_features = [
         "workclass",
