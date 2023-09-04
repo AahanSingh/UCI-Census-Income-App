@@ -30,20 +30,20 @@ def valid_input():
 @pytest.fixture
 def valid_input2():
     return {
-        "age": 43,
-        "workclass": "Self-emp-not-inc",
-        "fnlgt": 292175,
+        "age": 26,
+        "workclass": "State-gov",
+        "fnlgt": 20000,
         "education": "Masters",
         "education-num": 14,
-        "marital-status": "Divorced",
-        "occupation": "Exec-managerial",
-        "relationship": "Unmarried",
+        "marital-status": "Married",
+        "occupation": "Prof-specialty",
+        "relationship": "Not-in-family",
         "race": "White",
-        "sex": "Female",
-        "capital-gain": 0,
+        "sex": "Male",
+        "capital-gain": 14084,
         "capital-loss": 0,
-        "hours-per-week": 45,
-        "native-country": "United-States"
+        "hours-per-week": 0,
+        "native-country": "Germany"
     }
 
 

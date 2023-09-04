@@ -1,22 +1,23 @@
 MODEL METRICS:
+MODEL METRICS:
 Overall metrics:
-	Precision: 0.7349218168279971	Recall: 0.6141879278158059	fbeta: 0.6691525423728814
+	Precision: 0.7893700787401575	Recall: 0.5207792207792208	fbeta: 0.6275430359937403
 
 
 SLICE WISE METRICS:
 marital_status
            Divorced  Married-AF-spouse  Married-civ-spouse  Married-spouse-absent  Never-married  Separated   Widowed
-precision  0.640000                1.0            0.732258               0.500000       0.883721   1.000000  1.000000
-recall     0.351648                0.0            0.663743               0.142857       0.342342   0.181818  0.352941
-fbeta      0.453901                0.0            0.696319               0.222222       0.493506   0.307692  0.521739
+precision  1.000000                1.0            0.776618                    1.0       1.000000   1.000000  1.000000
+recall     0.289157                0.0            0.565350                    0.0       0.257426   0.200000  0.238095
+fbeta      0.448598                0.0            0.654354                    0.0       0.409449   0.333333  0.384615
 
 
 
 sex
              Female      Male
-precision  0.757062  0.731561
-recall     0.560669  0.623538
-fbeta      0.644231  0.673244
+precision  0.796610  0.788419
+recall     0.435185  0.534743
+fbeta      0.562874  0.637264
 
 
 

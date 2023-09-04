@@ -34,7 +34,7 @@ def train_model(X_train: pd.DataFrame, y_train: pd.DataFrame):
     model
         Trained machine learning model.
     """
-    clf = RandomForestClassifier(max_depth=50, n_estimators=500)
+    clf = RandomForestClassifier(max_depth=10, n_estimators=50)
     clf.fit(X_train, y_train)
     return clf
 
