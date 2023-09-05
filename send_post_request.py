@@ -20,6 +20,6 @@ def send_post_request():
         "native-country": "United-States"
     }
     response = requests.post(url, json=json_data)
-    print(response.text)
+    print(response.text, "status code: ",response.status_code)
 
 send_post_request()
